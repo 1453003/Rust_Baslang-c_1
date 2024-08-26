@@ -1,4 +1,4 @@
-fn main() {
+/*fn main(){
    // let _message ="hello, world!";
 
    // let x:i32=42;
@@ -211,8 +211,12 @@ fn return_reference(some_string: &String) -> &String{
     some_string
 }
 
+
 */
 
+
+
+fn main(){
 //  ***struct****
 let book =Book{
     title:String::from ("The way of Zen"),
@@ -310,10 +314,93 @@ impl Rectangle{
         self.width * self.height
     }
 }
+    }
+*/
+
+// *** Enums***
+fn main()
+{
+    let current_weather=Weather::Sunny;
+    let msg= Message::Write(String::from ("
+    Anything other than some sentence starting with hello
+    "));
+process_message(msg);
+let my_pet=Animal::Cat("Hello".to_string());
+if let Animal::Cat(name)=my_pet{
+    println!("My cat name is: {}",name);
+}
+else{
+    println!("My cat is not a cat");
+}
+
+let msg= Message::Write(String::from("hello is sleeping"));
+msg.call();
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+}
+
+enum Weather{
+    Sunny,
+    Cloudy,
+    Rainy,
+    Snowy,
+}
+
+enum Message{
+    Quit,
+    Move{x:i32, y:i32},
+    Write(String),
+    ChangeColor(i32,i32,i32),
+}
+impl Message
+{
+    fn call(&self){
+        match self{
+            Message::Quit=> println!("Quite"),
+            Message::Move {x,y}=> println!("Move to x: {}, y: {}",x,y),
+            Message::Write(s)=>println!("Write: {}", s),
+            Message::ChangeColor(r,g,b)=>{
+                println!("Change color to R: {}, G: {} ,B: {}",r,g,b);
+            }
+        }
+      
+    }
+}
+
+fn process_message(msg:Message){
+    match msg{
+        Message::Quit=>{
+            println!("The quit vaiant has no data");
+
+        }
+        Message::Move{x,y}=>{
+            println!("Move to coordinates x: {}, y: {}",x,y);
+        }
+        Message::Write(text)=>{
+            println!("text message: {}",text);
+        }
+        Message::ChangeColor(r,g,b)=>{
+            println!("change the color to red: {}, green: {}, blue {}",r,g,b);
+        }
+    }
+}
+
+enum Animal{
+    Dog(String),
+    Cat(String),
+    Brid(String),
+}
 
